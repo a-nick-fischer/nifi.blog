@@ -1,0 +1,25 @@
+@import "common.css";
+
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: monospace;
+}
+
+article {
+    width: 50%;
+}
+
+@media (max-width: 768px) {
+    article {
+        width: 90%;
+    }
+}
+
+.license-footer {
+    position: relative;
+    margin-top: 20px;
+}

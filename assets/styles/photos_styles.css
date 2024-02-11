@@ -1,0 +1,50 @@
+@import "common.css";
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: monospace;
+    overflow: hidden;
+}
+
+main {
+    display: flex;
+    height: calc(100% - 120px);
+    margin: 20px;
+    margin-top: 5px;
+}
+
+#gallery {
+    flex: 1;
+    margin-right: 20px;
+    z-index: 1;
+    background-color: white;
+    height: 100%;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    direction: rtl;
+}
+
+#map {
+    flex: 1;
+    height: 100%;
+}
+
+#hide-button {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #hide-button {
+        display: block;
+        position: absolute;
+        top: 5px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .hidden {
+        display: none;
+    }
+}

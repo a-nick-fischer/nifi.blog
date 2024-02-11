@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{.Title}}</title>
+
+        {{ template "meta" }}
+        
+        <meta name="description" content="{{ .Summary }}"/>
+        <meta name="keywords" content="{{ range .Tags }}{{ . }},{{ end }}"/>
+
+        <link rel="canonical" href="https://nifi.blog/blog/{{ .Slug }}"/>
+        <link rel="stylesheet" href="/assets/styles/article_styles.css"/>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js" integrity="sha512-9khQRAUBYEJDCDVP2yw3LRUQvjJ0Pjx0EShmaQjcHa6AXiOv6qHQu9lCAIR8O+/D8FtaCoJ2c0Tf9Xo7hYH01Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-SkmBfuA2hqjzEVpmnMt/LINrjop3GKWqsuLSSB3e7iBmYK7JuWw4ldmmxwD9mdm2IRTTi0OxSAfEGvgEi0i2Kw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        {{ template "home-button" }}
+
+        <main>
+            <article>
+                {{.HtmlBody}}
+            </article>
+        </main>
+
+        {{ template "footer"}}
+    </body>
+</html>

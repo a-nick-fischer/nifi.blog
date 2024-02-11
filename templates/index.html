@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>nifi - home</title>
+
+        {{ template "meta" }}
+
+        <meta name="description" content="Personal website of Nick Fischer - photography, tech blog and more. Website available on GitHub under MIT license."/>
+        <meta name="keywords" content="photography,images,blog,technology,programming"/>
+
+        <link rel="canonical" href="https://nifi.blog"/>
+        <link rel="stylesheet" href="/assets/styles/index_styles.css"/>
+    </head>
+    <body>
+        <main class="fade-in">
+            <figure>
+                <img 
+                    src="https://avatars.githubusercontent.com/u/19800702?v=4"
+                    alt="Image of me"
+                    width="200"
+                    height="200"/>
+            </figure>
+            <nav>
+                <a href="https://github.com/a-nick-fischer" target="_blank"> 
+                    <img alt="GitHub" src="https://icongr.am/fontawesome/github.svg?size=50&color=222323" width="50"/>
+                </a>
+
+                <a href="/" target="_blank"> 
+                    <img alt="Instagram" src="https://icongr.am/fontawesome/instagram.svg?size=50&color=222323" width="50"/>
+                </a>
+
+                <a href="/photos.html"> 
+                    <img alt="Photography" src="https://icongr.am/fontawesome/image.svg?size=50&color=222323" width="50"/>
+                </a>
+
+                <a href="/blog.html"> 
+                    <img alt="Blog" src="https://icongr.am/fontawesome/pencil.svg?size=50&color=222323" width="50"/>
+                </a>
+            </nav>
+        </main>
+        {{ template "footer" }}
+    </body>
+</html>

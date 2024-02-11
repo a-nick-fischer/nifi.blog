@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>nifi - blog</title>
+
+        {{ template "meta" }}
+
+        <meta name="description" content="Personal website of Nick Fischer - photography, tech blog and more. Website available on GitHub under MIT license."/>
+        <meta name="keywords" content="photography,images,blog,technology,programming"/>
+        
+        <link rel="canonical" href="https://nifi.blog/blog"/>
+
+        <link rel="stylesheet" href="/assets/styles/blog_styles.css"/>
+    </head>
+    <body>
+        {{ template "home-button" }}
+
+        <main>
+            {{ range . }}
+                <section>
+                    <h3>
+                        👉 
+                        <a href="/blog/{{ .Slug }}.html">{{ .Title }}</a>
+                        <span class="date">{{ .Date }}</span>
+                    </h3>
+                    <p>{{ .Summary }}</p>
+                </section>
+            {{ end }}
+        </main>
+    </body>
+</html>

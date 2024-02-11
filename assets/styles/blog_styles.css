@@ -1,0 +1,38 @@
+@import "common.css";
+
+main {
+    width: 100%;
+    height: calc(100% - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: monospace;
+}
+
+section {
+    width: 50%;
+    padding: 20px 10px;
+    margin-top: 20px;
+    border-bottom: 2px solid #222323;
+}
+
+section h3 a {
+    color: #222323;
+    text-decoration: none;
+}
+
+section h3 a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    section {
+        width: 70%;
+    }
+}
+
+.date {
+    color: #7c7e7e;
+    float: right;
+}

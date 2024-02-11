@@ -1,0 +1,9 @@
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build directory
+/build/
