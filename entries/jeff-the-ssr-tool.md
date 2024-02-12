@@ -1,5 +1,5 @@
 ---
-title: Writing your own SSR for Dummies
+title: Jeff, the SSR Tool
 summary: We didn't have enough SSR tools yet, so I decided to write my own and learn Go while doing it.
 date: 11.02.2024
 tags:
