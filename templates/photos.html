@@ -5,14 +5,14 @@
 
         {{ template "meta" }}
 
-        <meta name="description" content="Images taken by Nick Fischer. All images are available under CC-BY."/>
-        <meta name="keywords" content="photography,photo,images,fujifilm,street photography"/>
+        <meta name="description" content="Images taken by Nick Fischer. All images are available under CC-BY.">
+        <meta name="keywords" content="photography,photo,images,fujifilm,street photography">
 
-        <link rel="canonical" href="https://nifi.blog/photos"/>
+        <link rel="canonical" href="https://nifi.blog/photos">
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nanogallery2/3.0.5/css/nanogallery2.min.css" integrity="sha512-6sOT9zKSKq1CYgNMqtcY84tFPDnG1yX5mxwdGQiAVpAomVr2kUKJ//pFeU/KfaZDVCOru5iFOVswpT4RWWF2dQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="/assets/styles/photos_styles.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nanogallery2/3.0.5/css/nanogallery2.min.css" integrity="sha512-6sOT9zKSKq1CYgNMqtcY84tFPDnG1yX5mxwdGQiAVpAomVr2kUKJ//pFeU/KfaZDVCOru5iFOVswpT4RWWF2dQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="/assets/styles/photos_styles.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/nanogallery2/3.0.5/jquery.nanogallery2.min.js" integrity="sha512-tvpLVnZrWnnNzV2921XEMx4xkFTUF8xg3s+Mi6cvC/R7A6X1FkpBUXPJFa3Xh5uD9BvOZ2tHeYq/5ZqrweW86Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -22,7 +22,7 @@
         {{ template "home-button" }}
         
         <main>
-            <img id="hide-button" alt="Switch between Gallery and Map" src="" width="50"/>
+            <img id="hide-button" alt="Switch between Gallery and Map" src="https://icongr.am/fontawesome/map.svg?size=40&color=222323" width="50"/>
 
             <div id="gallery" data-nanogallery2></div>
 
@@ -89,8 +89,6 @@
                 $("#hide-button").attr("src", ($("#hide-button").attr("src") === galleryIcon ? mapIcon : galleryIcon));
                 map.invalidateSize(true);
             });
-
-            $("#hide-button").attr("src", mapIcon);
         </script>
     </body>
 </html>
