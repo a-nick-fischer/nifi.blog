@@ -1,3 +1,8 @@
+html, body {
+    font-family: monospace;
+    font-size: 1.02em;
+}
+
 .license-footer {
     position: fixed;
     bottom: 0;

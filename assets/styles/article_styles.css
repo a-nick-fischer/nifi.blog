@@ -1,12 +1,16 @@
 @import "common.css";
 
+pre {
+    /* Override prismjs css */
+    font-family: monospace !important;
+}
+
 main {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    font-family: monospace;
 }
 
 article {
