@@ -35,6 +35,7 @@ const PHOTOS_DIR = "photos"
 const TEMPLATES_DIR = "templates"
 const ASSETS_DIR = "assets"
 
+const MAX_IMAGE_SIZE = 25 * 1024 * 1024
 const THUMBNAIL_WIDTH = 200
 
 type Photo struct {
@@ -272,6 +273,16 @@ func readPhotos() []Photo {
 	names := make([]Photo, len(images))
 	for i, image := range images {
 		imagePath := yos.JoinPath(PHOTOS_DIR, image.Name())
+
+		// Needed because we cannot serve files larger than 25MB from Cloudflare
+		fileInfo, err := os.Stat(imagePath)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if fileInfo.Size() > MAX_IMAGE_SIZE {
+			log.Fatalf("Image %s is too large", image.Name())
+		}
 
 		f, err := os.Open(imagePath)
 		if err != nil {
