@@ -337,8 +337,8 @@ func readPhotos() []Photo {
 		names[i] = Photo{
 			Name:      image.Name(),
 			Title:     image.Name(),
-			Longitude: lat,
-			Latitude:  lon,
+			Longitude: lon,
+			Latitude:  lat,
 		}
 	}
 
