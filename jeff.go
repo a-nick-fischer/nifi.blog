@@ -15,7 +15,6 @@ import (
 	"github.com/disintegration/imaging"
 	"github.com/ikeikeikeike/go-sitemap-generator/v2/stm"
 	"github.com/rwcarlsen/goexif/exif"
-	"github.com/rwcarlsen/goexif/tiff"
 	"github.com/yuin/goldmark"
 	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/parser"
@@ -324,70 +323,24 @@ func readPhotos() []Photo {
 			log.Fatal(err)
 		}
 
-		lon := 0.0
-		lat := 0.0
-
 		info, err := exif.Decode(f)
 		if err != nil {
-			lon = -1.0
-			lat = -1.0
+			log.Fatalf("Error decoding exif data for %s: %s", image.Name(), err)
 		}
 
-		longitudeExif, err := info.Get(exif.GPSLongitude)
+		lat, lon, err := info.LatLong()
 		if err != nil {
-			lon = -1.0
-			lat = -1.0
+			lat = -1
+			lon = -1
 		}
-
-		latitudeExif, err := info.Get(exif.GPSLatitude)
-		if err != nil {
-			lon = -1.0
-			lat = -1.0
-		}
-
-		if lon == -1.0 || lat == -1.0 {
-			names[i] = Photo{
-				Name:      image.Name(),
-				Title:     image.Name(),
-				Longitude: lon,
-				Latitude:  lat,
-			}
-			continue
-		}
-
-		lon = exifGPSDataToCoordinate(longitudeExif)
-		lat = exifGPSDataToCoordinate(latitudeExif)
 
 		names[i] = Photo{
 			Name:      image.Name(),
 			Title:     image.Name(),
-			Longitude: lon,
-			Latitude:  lat,
+			Longitude: lat,
+			Latitude:  lon,
 		}
 	}
 
 	return names
-}
-
-func exifGPSDataToCoordinate(data *tiff.Tag) float64 {
-	degreesRat, err := data.Rat(0)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	minutesRat, err := data.Rat(1)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	secondsRat, err := data.Rat(2)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	degrees, _ := degreesRat.Float64()
-	minutes, _ := minutesRat.Float64()
-	seconds, _ := secondsRat.Float64()
-
-	return degrees + minutes/60 + seconds/3600
 }
