@@ -24,7 +24,7 @@ const INDEX_TEMPLATE_FILE = "index.html"
 const PHOTOS_TEMPLATE_FILE = "photos.html"
 const BLOG_TEMPLATE_FILE = "blog.html"
 
-const FAVICON_PATH = "assets/favicon.ico"
+const FAVICON_PATH = "assets/favicon.svg"
 
 const OUTPUT_DIR = "build"
 const THUMBNAILS_DIR = "build/thumbnails"
