@@ -114,6 +114,8 @@ func generateSitemap(photos []Photo, articles []Article) {
 
 	sitemap := stm.NewSitemap(1)
 
+	sitemap.SetVerbose(false)
+
 	sitemap.SetDefaultHost("https://nifi.blog")
 
 	sitemap.Create()
@@ -129,8 +131,6 @@ func generateSitemap(photos []Photo, articles []Article) {
 	for _, article := range articles {
 		sitemap.Add(stm.URL{{"loc", fmt.Sprintf("/blog/%s", article.Slug)}})
 	}
-
-	sitemap.Finalize()
 
 	xml := sitemap.XMLContent()
 
