@@ -13,6 +13,7 @@ import (
 
 	"github.com/1set/gut/yos"
 	"github.com/disintegration/imaging"
+	"github.com/ikeikeikeike/go-sitemap-generator/v2/stm"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/rwcarlsen/goexif/tiff"
 	"github.com/yuin/goldmark"
@@ -69,9 +70,12 @@ func main() {
 	}
 
 	generateBlogEntries(articles, templates)
+	generateSitemap(photos, articles)
+
 	generateTemplate(templates, BLOG_TEMPLATE_FILE, articles)
 	generateTemplate(templates, PHOTOS_TEMPLATE_FILE, photos)
 	generateTemplate(templates, INDEX_TEMPLATE_FILE, "")
+
 	copyFiles()
 }
 
@@ -103,6 +107,37 @@ func regenerateOutputDir(dontDeleteThumbnails bool) {
 		if err != nil {
 			log.Fatal(err)
 		}
+	}
+}
+
+func generateSitemap(photos []Photo, articles []Article) {
+	fmt.Println("Generating sitemap...")
+
+	sitemap := stm.NewSitemap(1)
+
+	sitemap.SetDefaultHost("https://nifi.blog")
+
+	sitemap.Create()
+
+	sitemap.Add(stm.URL{{"loc", "/"}})
+	sitemap.Add(stm.URL{{"loc", "/blog"}})
+	sitemap.Add(stm.URL{{"loc", "/photos"}})
+
+	for _, photo := range photos {
+		sitemap.Add(stm.URL{{"loc", fmt.Sprintf("/photos/%s", photo.Name)}})
+	}
+
+	for _, article := range articles {
+		sitemap.Add(stm.URL{{"loc", fmt.Sprintf("/blog/%s", article.Slug)}})
+	}
+
+	sitemap.Finalize()
+
+	xml := sitemap.XMLContent()
+
+	err := os.WriteFile(yos.JoinPath(OUTPUT_DIR, "sitemap.xml"), xml, 0777)
+	if err != nil {
+		log.Fatal(err)
 	}
 }
 
