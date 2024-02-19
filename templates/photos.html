@@ -37,6 +37,13 @@
         </footer>
 
         <script>
+
+            // Workaround
+            // For some reason not all thumbnails get displayed correctly when the page is loaded...
+            $("#gallery").scroll(() => {
+                $("#gallery").nanogallery2("resize");
+            });
+
             $("#gallery").nanogallery2({
                 thumbnailHeight:  "auto",
                 thumbnailWidth:   200,
@@ -95,8 +102,6 @@
                 $("#hide-button").attr("src", ($("#hide-button").attr("src") === galleryIcon ? mapIcon : galleryIcon));
                 map.invalidateSize(true);
             });
-
-            $('#gallery').nanogallery2('resize');
         </script>
     </body>
 </html>
