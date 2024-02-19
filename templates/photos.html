@@ -42,12 +42,18 @@
                 thumbnailWidth:   200,
                 thumbnailLabel: { display: false },
 
+                viewerTools: {
+                    topLeft: 'pageCounter',
+                    topRight: 'downloadButton, fullscreenButton, rotateLeft, rotateRight, closeButton'
+                },
+
                 items: [
                     {{ range . }}
                         {
                             src: '/photos/{{ .Name }}',
                             srct: '/thumbnails/{{ .Name }}',
                             title: '{{ .Title }}',
+                            downloadUrl: '/photos/{{ .Name }}',
                             ID: '{{ .Title }}'
                         },
                     {{ end }}
@@ -89,6 +95,8 @@
                 $("#hide-button").attr("src", ($("#hide-button").attr("src") === galleryIcon ? mapIcon : galleryIcon));
                 map.invalidateSize(true);
             });
+
+            $('#gallery').nanogallery2('resize');
         </script>
     </body>
 </html>
