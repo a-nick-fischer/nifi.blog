@@ -68,14 +68,13 @@ func main() {
 		generateThumbnails(photos)
 	}
 
-	generateBlogEntries(articles, templates)
+	generatePagesFromTemplates(templates, articles, photos)
+
+	generateBlogEntriesFromMarkdown(templates, articles)
+
 	generateSitemap(photos, articles)
 
-	generateTemplate(templates, BLOG_TEMPLATE_FILE, articles)
-	generateTemplate(templates, PHOTOS_TEMPLATE_FILE, photos)
-	generateTemplate(templates, INDEX_TEMPLATE_FILE, "")
-
-	copyFiles()
+	copyAssetsToOutputDirectory()
 }
 
 func regenerateOutputDir(dontDeleteThumbnails bool) {
@@ -140,6 +139,12 @@ func generateSitemap(photos []Photo, articles []Article) {
 	}
 }
 
+func generatePagesFromTemplates(templates *template.Template, articles []Article, photos []Photo) {
+	generateTemplate(templates, BLOG_TEMPLATE_FILE, articles)
+	generateTemplate(templates, PHOTOS_TEMPLATE_FILE, photos)
+	generateTemplate(templates, INDEX_TEMPLATE_FILE, "")
+}
+
 func generateTemplate(templates *template.Template, templateFile string, args any) {
 	fmt.Printf("Generating %s...\n", templateFile)
 	htmlOutputPath := yos.JoinPath(OUTPUT_DIR, templateFile)
@@ -154,7 +159,7 @@ func generateTemplate(templates *template.Template, templateFile string, args an
 	}
 }
 
-func copyFiles() {
+func copyAssetsToOutputDirectory() {
 	fmt.Println("Copying files...")
 	err := yos.CopyFile(FAVICON_PATH, OUTPUT_DIR)
 	if err != nil {
@@ -213,7 +218,7 @@ func generateThumbnail(image string) {
 	}
 }
 
-func generateBlogEntries(articles []Article, templates *template.Template) {
+func generateBlogEntriesFromMarkdown(templates *template.Template, articles []Article) {
 	fmt.Println("Generating blog entries...")
 
 	err := os.MkdirAll(BLOG_ENTRIES_HTML_DIR, 0777)
