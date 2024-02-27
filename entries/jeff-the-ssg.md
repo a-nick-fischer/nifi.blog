@@ -199,7 +199,7 @@ Now you can close this window and connect your custom domain. If you don't conne
 Alright, but how do we actually get our site on Cloudflare? Using a simple GitHub Action. But first, you need an API token and your account ID. Getting both is pretty easy: an API token can be created on [your profile page](https://dash.cloudflare.com/profile/api-tokens), you need a custom token with `Edit`-Permissions for `Cloudflare Pages` and your Account-ID can be seen in the Cloudflare Dashboard URL:
 
 ![The cloudflare account id is directly after the dash.cloudflare.com in the URL](../assets/blog/jeff-the-ssg/image-3.png)
-The blured thing is my acount ID
+The blured thing is my account ID
 
 Now, we have everything we need to deploy using the following GitHub Action:
 
