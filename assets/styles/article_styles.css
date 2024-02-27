@@ -22,8 +22,19 @@ code {
 
 figure {
     text-align: center;
+    margin: 0;
+    width: 100%;
     margin-top: 30px;
     margin-bottom: 30px;
+}
+
+figure img {
+    max-width: 100%;
+}
+
+figcaption p {
+    color: #7c7e7e;
+    margin-top: 5px;
 }
 
 blockquote {
