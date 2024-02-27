@@ -3,6 +3,36 @@
 pre {
     /* Override prismjs css */
     font-family: monospace !important;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+code {
+    /* Override prismjs css */
+    font-family: monospace !important;
+    line-height: 1.2 !important;
+}
+
+/* Inline code fragments */
+*:not(pre) > code {
+    background-color: #f4f4f4;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+}
+
+figure {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+blockquote {
+    color: #7c7e7e;
+    margin: 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-left: 3em;
+    border-left: 0.5em #222323 solid;
 }
 
 main {
@@ -11,6 +41,10 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+h2, h3, h4, h5, h6 {
+    margin-top: 50px;
 }
 
 article {

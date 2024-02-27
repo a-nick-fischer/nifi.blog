@@ -1,6 +1,7 @@
 html, body {
     font-family: monospace;
-    font-size: 1.02em;
+    font-size: 1.1em;
+    line-height: 1.5;
 }
 
 .license-footer {

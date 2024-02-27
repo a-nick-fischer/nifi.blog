@@ -14,8 +14,10 @@ import (
 	"github.com/1set/gut/yos"
 	"github.com/disintegration/imaging"
 	"github.com/ikeikeikeike/go-sitemap-generator/v2/stm"
+	figure "github.com/mangoumbrella/goldmark-figure"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/yuin/goldmark"
+	emoji "github.com/yuin/goldmark-emoji"
 	meta "github.com/yuin/goldmark-meta"
 	"github.com/yuin/goldmark/parser"
 )
@@ -260,6 +262,8 @@ func readArticles() []Article {
 	markdown := goldmark.New(
 		goldmark.WithExtensions(
 			meta.Meta,
+			figure.Figure,
+			emoji.Emoji,
 		),
 	)
 

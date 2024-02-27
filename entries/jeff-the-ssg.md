@@ -10,7 +10,7 @@ tags:
     - devops
 ---
 
-## The Making of this Website
+# The Making of this Website
 
 Every person has a personal backlog. Items on it may include short-term things like doing the laundry or long-term commitments like learning Spanish, it doesn't matter as long as said activity can be conveniently postponed to some later date.
 
@@ -44,7 +44,7 @@ func main() {
 
     generateThumbnails(...)
 	
-	copyAssetsToOutputDirectory(...)
+    copyAssetsToOutputDirectory(...)
 }
 ```
 
@@ -163,7 +163,7 @@ func generateThumbnail(imageName string) {
 Thing is, this is slow. Like a-minute-for-50-images-slow. So we try to do a go-thing™ and parallelize it using goroutines. We have to use a wait-group to await all goroutines.
 
 
-```golang
+```go
 var wg sync.WaitGroup
 wg.Add(len(photos))
 
@@ -180,23 +180,26 @@ wg.Wait()
 ## Deploying
 Now, Jeff is ready to generate our deployment. So we just run `go run .` and observe our `build` directory:
 
-![Whoop whoop, our build directory](../assets/blog/jeff-the-ssg/image.png)
-
+![Build directory created by Jeff](../assets/blog/jeff-the-ssg/image.png)
+Whoop whoop, it works! :blush:
 
 Great, now we have our static assets ready. And the best thing is ... 🥁 we can deploy it for free on [Cloudflare](https://pages.cloudflare.com/)! Well, we COULD also host it on [Netlify](https://www.netlify.com/) or [GitHub Pages](https://pages.github.com/), but Cloudflare is way faster (at least I was told so, which is enough for me to try it). So, how do we do it?
 
 First, we need a domain name. I'm using `nifi.blog` as of now. Second, we need to create a new project on Cloudflare pages. We can do this by either connecting our GitHub or by `direct upload`:
 
-![The two options presented by Cloudflare](../assets/blog/jeff-the-ssg/image-1.png)
+![First Option: Connect Cloudflare to GitHub Repository, Second Option: Direct Upload](../assets/blog/jeff-the-ssg/image-1.png)
 
 Unfortunately, we cannot connect our GitHub in our case because we have a non-standard build pipeline - e.g. requiring the Golang toolchain. So we use the `direct upload` option, but we actually don't have to upload anything, we just have to name our project and create it:
+
 ![Creating the Cloudflare project](../assets/blog/jeff-the-ssg/image-2.png)
+Why is this thing hidden...
 
 Now you can close this window and connect your custom domain. If you don't connect one, it will be automatically hosted on a `pages.dev` subdomain, e.g. `nifi-blog.pages.dev` or similar.
 
 Alright, but how do we actually get our site on Cloudflare? Using a simple GitHub Action. But first, you need an API token and your account ID. Getting both is pretty easy: an API token can be created on [your profile page](https://dash.cloudflare.com/profile/api-tokens), you need a custom token with `Edit`-Permissions for `Cloudflare Pages` and your Account-ID can be seen in the Cloudflare Dashboard URL:
 
-![alt text](../assets/blog/jeff-the-ssg/image-3.png)
+![The cloudflare account id is directly after the dash.cloudflare.com in the URL](../assets/blog/jeff-the-ssg/image-3.png)
+The blured thing is my acount ID
 
 Now, we have everything we need to deploy using the following GitHub Action:
 
@@ -234,4 +237,4 @@ jobs:
 # Viva La Jeff
 Alright, by now you should have a ready website deployed on Cloudflare. Some things, like generating Sitemaps and extracting EXIF-Data from images can easily be added using libraries. 
 
-Cheers ✌
+Cheers :v:

@@ -13,8 +13,10 @@ require (
 require (
 	github.com/1set/gut v0.0.0-20201117175203-a82363231997
 	github.com/ikeikeikeike/go-sitemap-generator/v2 v2.0.2
+	github.com/mangoumbrella/goldmark-figure v1.0.0
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/yuin/goldmark v1.6.0
+	github.com/yuin/goldmark-emoji v1.0.2
 	github.com/yuin/goldmark-meta v1.1.0
 	golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8 // indirect
 )
