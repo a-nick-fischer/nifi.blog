@@ -4,7 +4,9 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"io"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
@@ -108,6 +110,46 @@ func regenerateOutputDir(dontDeleteThumbnails bool) {
 			log.Fatal(err)
 		}
 	}
+}
+
+func embedSvg(svgUrl string) string {
+	fmt.Printf("Embedding Svg %s...\n", svgUrl)
+
+	var body []byte
+
+	if strings.HasPrefix(svgUrl, "http") {
+		// Download the SVG
+		resp, err := http.Get(svgUrl)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer resp.Body.Close()
+
+		if resp.StatusCode != 200 {
+			log.Fatalf("Failed to download %s: %s", svgUrl, resp.Status)
+		}
+
+		body, err = io.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+	} else {
+		// Read the SVG from the local filesystem
+		var err error
+		body, err = os.ReadFile(svgUrl)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	// Remove newlines
+	body = bytes.ReplaceAll(body, []byte("\n"), []byte(""))
+
+	// Escape the # in the body
+	kindaUrlEncoded := bytes.ReplaceAll(body, []byte("#"), []byte("%23"))
+
+	return fmt.Sprintf("data:image/svg+xml;charset=utf-8,%s", kindaUrlEncoded)
 }
 
 func generateSitemap(photos []Photo, articles []Article) {
@@ -247,7 +289,9 @@ func readTemplates() *template.Template {
 	templateGlob := fmt.Sprintf("%s/*.html", TEMPLATES_DIR)
 
 	templates := template.Must(
-		template.ParseGlob(templateGlob),
+		template.New("main").
+			Funcs(template.FuncMap{"embedSvg": embedSvg}).
+			ParseGlob(templateGlob),
 	)
 
 	return templates
