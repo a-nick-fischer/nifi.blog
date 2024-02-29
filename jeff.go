@@ -113,7 +113,7 @@ func regenerateOutputDir(dontDeleteThumbnails bool) {
 }
 
 func embedSvg(svgUrl string) string {
-	fmt.Printf("Embedding Svg %s...\n", svgUrl)
+	fmt.Printf("Embedding SVG (%s)...\n", svgUrl)
 
 	var body []byte
 

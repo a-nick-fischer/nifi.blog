@@ -1,19 +1,35 @@
 @import "common.css";
 
+#shadow {
+    background-color: black;
+    
+    border: 2px solid black;
+    border-radius: 20%;
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    
+
+    animation: lower 1s ease-out;
+    animation-fill-mode: forwards;
+}
+
 main {
     margin: 0;
     position: absolute;
     top: 30%;
     left: 50%;
 
-    border: 2px solid #222323;
     padding: 20px;
     border-radius: 20%;
 
+    border: 2px solid #222323;
     background-color: white;
 
     animation: rise 1s ease-out;
     animation-fill-mode: forwards;
+    transform-style: preserve-3d;
 }
 
 main figure {
@@ -38,10 +54,17 @@ nav a {
 @keyframes rise {
     0% {
         transform: translate(-50%, -50%) translate(10px, 10px);
-        filter: drop-shadow(0px 0px 0px #000000);
     }
     100% {
         transform: translate(-50%, -50%);
-        filter: drop-shadow(6px 6px 0px #000000);
+    }
+}
+
+@keyframes lower {
+    0% {
+        transform: translate(-5%, -92%) translateZ(-10px);
+    }
+    100% {
+        transform: translate(-5%, -92%) translate(10px, 10px) translateZ(-10px);
     }
 }
