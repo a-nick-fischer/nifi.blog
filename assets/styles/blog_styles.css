@@ -27,11 +27,15 @@ section h3 a:hover {
 
 @media (max-width: 768px) {
     section {
-        width: 70%;
+        width: 90%;
+    }
+
+    .date {
+        display: none;
     }
 }
 
 .date {
-    color: #7c7e7e;
+    color: #4C4D4C;
     float: right;
 }
