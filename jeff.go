@@ -29,6 +29,7 @@ const PHOTOS_TEMPLATE_FILE = "photos.html"
 const BLOG_TEMPLATE_FILE = "blog.html"
 
 const FAVICON_PATH = "assets/favicon.svg"
+const ROBOTSTXT_PATH = "assets/robots.txt"
 
 const OUTPUT_DIR = "build"
 const THUMBNAILS_DIR = "build/thumbnails"
@@ -206,6 +207,11 @@ func generateTemplate(templates *template.Template, templateFile string, args an
 func copyAssetsToOutputDirectory() {
 	fmt.Println("Copying files...")
 	err := yos.CopyFile(FAVICON_PATH, OUTPUT_DIR)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = yos.CopyFile(ROBOTSTXT_PATH, OUTPUT_DIR)
 	if err != nil {
 		log.Fatal(err)
 	}
