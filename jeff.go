@@ -164,17 +164,18 @@ func generateSitemap(photos []Photo, articles []Article) {
 
 	sitemap.Create()
 
-	sitemap.Add(stm.URL{{"loc", "/"}})
-	sitemap.Add(stm.URL{{"loc", "/blog"}})
-	sitemap.Add(stm.URL{{"loc", "/photos"}})
-
+	imageUrls := make([]stm.URL, len(photos))
 	for _, photo := range photos {
-		sitemap.Add(stm.URL{{"loc", fmt.Sprintf("/photos/%s", photo.Name)}})
+		imageUrls = append(imageUrls, stm.URL{{"loc", fmt.Sprintf("/photos/%s", photo.Name)}})
 	}
 
 	for _, article := range articles {
 		sitemap.Add(stm.URL{{"loc", fmt.Sprintf("/blog/%s", article.Slug)}})
 	}
+
+	sitemap.Add(stm.URL{{"loc", "/"}})
+	sitemap.Add(stm.URL{{"loc", "/blog"}})
+	sitemap.Add(stm.URL{{"loc", "/photos"}, {"image", imageUrls}})
 
 	xml := sitemap.XMLContent()
 
