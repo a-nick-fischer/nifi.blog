@@ -62,9 +62,9 @@ nav a {
 
 @keyframes lower {
     0% {
-        transform: translate(-5%, -92%) translateZ(-10px);
+        transform: translate(-7%, -93%) translateZ(-10px);
     }
     100% {
-        transform: translate(-5%, -92%) translate(10px, 10px) translateZ(-10px);
+        transform: translate(-7%, -93%) translate(10px, 10px) translateZ(-10px);
     }
 }
