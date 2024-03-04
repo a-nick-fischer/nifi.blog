@@ -9,7 +9,7 @@ html, body {
 
 main {
     display: flex;
-    height: calc(100% - 120px);
+    height: calc(100dvh - 120px);
     margin: 20px;
     margin-top: 5px;
 }
@@ -35,6 +35,10 @@ main {
 }
 
 @media (max-width: 768px) {
+    #gallery {
+        margin-right: 0px;
+    }
+
     #hide-button {
         display: block;
         position: absolute;

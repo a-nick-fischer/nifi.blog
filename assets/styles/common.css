@@ -23,6 +23,14 @@ html, body {
     color: #222323;
 }
 
+@media (max-width: 768px) {
+    .license-footer {
+        margin: 0px 3px;
+        font-size: smaller;
+        line-height: 1;
+    }
+}
+
 .home-button {
     width: 25px;
     border-radius: 20%;
@@ -30,4 +38,6 @@ html, body {
     padding: 10px 10px 5px 10px;
     margin: 5px;
     display: inline-block;
+    line-height: normal;
+    font-size: 1em;
 }
