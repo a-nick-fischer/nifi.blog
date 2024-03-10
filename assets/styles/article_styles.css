@@ -71,4 +71,5 @@ article {
 .license-footer {
     position: relative;
     margin-top: 20px;
+    top: unset;
 }
