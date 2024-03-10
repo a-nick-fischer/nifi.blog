@@ -165,8 +165,10 @@ func generateSitemap(photos []Photo, articles []Article) {
 	sitemap.Create()
 
 	imageUrls := make([]stm.URL, len(photos))
-	for _, photo := range photos {
-		imageUrls = append(imageUrls, stm.URL{{"loc", fmt.Sprintf("/photos/%s", photo.Name)}})
+	for i, photo := range photos {
+		// Yes we have to use the full URL here, because reasons...
+		loc := fmt.Sprintf("https://nifi.blog/photos/%s", photo.Name)
+		imageUrls[i] = stm.URL{{"loc", loc}}
 	}
 
 	for _, article := range articles {
