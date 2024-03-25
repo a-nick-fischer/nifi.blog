@@ -7,3 +7,6 @@
 
 # Build directory
 /build/
+
+# GPX files
+/gpx/
