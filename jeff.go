@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"sync"
 	"text/template"
@@ -43,9 +44,14 @@ const ASSETS_DIR = "assets"
 const MAX_IMAGE_SIZE = 25 * 1024 * 1024
 const THUMBNAIL_WIDTH = 200
 
+var SORTING_PRIORITY = [2]string{
+	"actually good", "ok",
+}
+
 type Photo struct {
 	Name      string
 	Title     string
+	Tags      []string
 	Longitude float64
 	Latitude  float64
 }
@@ -366,7 +372,7 @@ func readPhotos() []Photo {
 		log.Fatal(err)
 	}
 
-	names := make([]Photo, len(images))
+	photos := make([]Photo, len(images))
 	for i, image := range images {
 		imagePath := yos.JoinPath(PHOTOS_DIR, image.Name())
 
@@ -390,19 +396,57 @@ func readPhotos() []Photo {
 			log.Fatalf("Error decoding exif data for %s: %s", image.Name(), err)
 		}
 
+		tags := extractKeywords(info)
+
 		lat, lon, err := info.LatLong()
 		if err != nil {
 			lat = -1
 			lon = -1
 		}
 
-		names[i] = Photo{
+		photos[i] = Photo{
 			Name:      image.Name(),
 			Title:     image.Name(),
+			Tags:      tags,
 			Longitude: lon,
 			Latitude:  lat,
 		}
 	}
 
-	return names
+	slices.SortFunc(photos, customSortImagesAccordingToMyFlawlessLogic)
+
+	return photos
+}
+
+func extractKeywords(info *exif.Exif) []string {
+	tag, err := info.Get(exif.XPKeywords)
+	if err != nil {
+		log.Fatalf("Error extracting keywords: %s", err)
+	}
+
+	tags := strings.Split(string(tag.Val), ";")
+
+	// For some god damned reason reading the keywords from the exif data
+	// results in a bunch of null bytes in the string which we have to remove
+	for i, tag := range tags {
+		tags[i] = strings.ReplaceAll(tag, "\x00", "")
+	}
+
+	return tags
+}
+
+func customSortImagesAccordingToMyFlawlessLogic(a, b Photo) int {
+	grade := func(photo Photo) int {
+		for i, priority := range SORTING_PRIORITY {
+			for _, tag := range photo.Tags {
+				if tag == priority {
+					return i
+				}
+			}
+		}
+
+		return len(SORTING_PRIORITY)
+	}
+
+	return grade(a) - grade(b)
 }
